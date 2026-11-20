@@ -1,120 +1,166 @@
-"""Interactive Streamlit dashboard for Email Automation & Reminder System."""
-from pathlib import Path
+"""Flagship Email Automation & Recurring Notification Studio.
+Features:
+- Contact directory manager with instant opt-out toggling
+- Jinja2 HTML email template designer with real-time live preview
+- RFC 5545 recurrence scheduler (Daily, Weekly, Monthly, Custom RRULE)
+- Live test dispatcher (dry-run simulation & live SMTP)
+- Interactive delivery analytics & SQLite audit log
+"""
+
 import sqlite3
+from datetime import datetime
+from pathlib import Path
 import pandas as pd
+import plotly.express as px
 import streamlit as st
+
+from src.config import settings
 from src.renderer import render_email
+from src.scheduler import expand_schedule
 from src.mailer import send_email
 
 ROOT = Path(__file__).resolve().parent
 
 st.set_page_config(
-    page_title="Email Automation & Reminder Dashboard",
-    layout="wide",
+    page_title="NotifyFlow — Enterprise Email Automation Studio",
     page_icon="✉️",
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
 
-st.title("✉️ Email Automation & Scheduled Reminder Platform")
-st.caption("RFC 5545 RRULE Recurrence, Jinja2 Personalization & Delivery Logging")
+st.markdown("""
+<style>
+    .notify-title { font-size: 2.2rem; font-weight: 800; color: #4338CA; }
+    .notify-sub { font-size: 1.05rem; color: #64748B; margin-bottom: 1.3rem; }
+    .status-badge-sent { background-color: #DCFCE7; color: #166534; font-weight: 700; padding: 4px 8px; border-radius: 4px; }
+    .status-badge-skipped { background-color: #FEF3C7; color: #92400E; font-weight: 700; padding: 4px 8px; border-radius: 4px; }
+</style>
+""", unsafe_allow_html=True)
 
-# Sidebar
+st.markdown('<div class="notify-title">✉️ NotifyFlow — Email Automation & Reminder Studio</div>', unsafe_allow_html=True)
+st.markdown('<div class="notify-sub">RFC 5545 RRULE Recurrence • Dynamic Jinja2 Templating • CAN-SPAM Compliance & Delivery Auditing</div>', unsafe_allow_html=True)
+
+# Load Data
+contacts_df = pd.read_csv(settings.contacts_path) if settings.contacts_path.exists() else pd.DataFrame(columns=["name", "email", "timezone", "unsubscribed"])
+reminders_df = pd.read_csv(settings.reminders_path) if settings.reminders_path.exists() else pd.DataFrame()
+
+# Sidebar: Environment & Dispatch Mode
 with st.sidebar:
-    st.header("⚙️ Dispatch Settings")
-    st.info("Operating Mode: **Dry-Run Simulation**\n\nNo actual SMTP traffic will be dispatched unless credentials are configured.")
+    st.header("⚙️ Dispatch Mode")
+    dry_run_mode = st.toggle("Dry-Run Simulation Mode", value=settings.dry_run, help="Simulates rendering and logging without sending live SMTP traffic.")
+    if dry_run_mode:
+        st.info("🛡️ Safe Simulation Active: Emails will be validated, rendered, and logged to SQLite without live transmission.")
+    else:
+        st.warning("⚠️ Live SMTP Active: Real emails will be dispatched using configured credentials.")
+
     st.markdown("---")
-    st.markdown("### 📊 System Status")
-    st.markdown("- **Engine:** Active")
-    st.markdown("- **Database:** SQLite 3")
-    st.markdown("- **Templating:** Jinja2")
+    st.header("➕ Add New Contact")
+    with st.form("add_contact_form", clear_on_submit=True):
+        c_name = st.text_input("Full Name", "Aarav Sharma")
+        c_email = st.text_input("Email Address", "aarav@example.com")
+        c_tz = st.selectbox("Timezone", ["Asia/Kolkata", "UTC", "America/New_York", "Europe/London"])
+        c_optout = st.checkbox("Opted-Out / Unsubscribed", value=False)
+        
+        if st.form_submit_button("Save Contact"):
+            new_row = pd.DataFrame([{"name": c_name, "email": c_email, "timezone": c_tz, "unsubscribed": c_optout}])
+            contacts_df = pd.concat([contacts_df, new_row], ignore_index=True)
+            contacts_df.to_csv(settings.contacts_path, index=False)
+            st.success(f"Added {c_name} to contacts!")
 
-db_path = ROOT / "db" / "email.db"
-contacts_csv = ROOT / "data" / "contacts.csv"
-reminders_csv = ROOT / "data" / "reminders.csv"
-
-contacts_df = pd.read_csv(contacts_csv) if contacts_csv.exists() else pd.DataFrame()
-reminders_df = pd.read_csv(reminders_csv) if reminders_csv.exists() else pd.DataFrame()
-
-# Top KPIs
-col1, col2, col3, col4 = st.columns(4)
+# Top KPI Metric Row
+k1, k2, k3, k4 = st.columns(4)
 total_contacts = len(contacts_df)
-opted_out = int((contacts_df["unsubscribed"].astype(str).str.lower() == "true").sum()) if not contacts_df.empty else 0
-active_contacts = total_contacts - opted_out
-total_reminders = len(reminders_df)
+opted_out_cnt = int((contacts_df["unsubscribed"].astype(str).str.lower() == "true").sum()) if not contacts_df.empty else 0
+active_contacts = total_contacts - opted_out_cnt
+total_schedules = len(reminders_df)
 
-col1.metric("Total Contacts", total_contacts)
-col2.metric("Active Recipients", active_contacts)
-col3.metric("Opted Out", opted_out, delta=f"-{(opted_out/max(1, total_contacts)*100):.0f}%" if total_contacts else "0")
-col4.metric("Active Schedules", total_reminders)
+k1.metric("Total Contacts", total_contacts)
+k2.metric("Active Subscribers", active_contacts)
+k3.metric("Opt-Out Rate", f"{(opted_out_cnt / max(1, total_contacts))*100:.1f}%")
+k4.metric("Configured Campaigns", total_schedules)
 
 st.markdown("---")
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "📊 Delivery Logs", 
-    "👥 Contacts Directory", 
-    "⏰ Recurring Reminders", 
-    "📝 Template Previewer",
-    "🚀 Test Dispatcher"
+tab_designer, tab_dispatch, tab_logs, tab_contacts = st.tabs([
+    "🎨 Email Template Designer & Live Preview",
+    "🚀 Campaign Dispatcher & Scheduler",
+    "📊 Delivery Logs & Audit Trail",
+    "👥 Audience Directory"
 ])
 
-with tab1:
-    st.subheader("Message Delivery Logs & Audit Trail")
-    if db_path.exists():
-        conn = sqlite3.connect(str(db_path))
+with tab_designer:
+    st.subheader("Interactive Jinja2 Template Designer")
+    
+    col_t1, col_t2 = st.columns([1, 1])
+    templates = [p.name for p in settings.templates_dir.glob("*.html")]
+    selected_template = st.selectbox("Select Existing Template to Preview/Edit", templates)
+    
+    current_content = (settings.templates_dir / selected_template).read_text(encoding="utf-8")
+    
+    with col_t1:
+        st.markdown("**Jinja2 Template Source Code:**")
+        template_editor = st.text_area("HTML & Template Tags", value=current_content, height=350)
+        
+        st.markdown("**Sample Recipient Context (JSON):**")
+        p_name = st.text_input("Name Variable", "Priya Nair")
+        p_title = st.text_input("Title Variable", "Technical Interview Round 1")
+        p_date = st.text_input("Date Variable", "2026-11-25 14:00:00")
+
+    with col_t2:
+        st.markdown("**Live Rendered Client Preview:**")
+        from jinja2 import Template
+        try:
+            rendered_html = Template(template_editor).render(
+                name=p_name,
+                title=p_title,
+                scheduled_time=p_date,
+                timezone="Asia/Kolkata"
+            )
+            st.components.v1.html(rendered_html, height=450, scrolling=True)
+        except Exception as e:
+            st.error(f"Template Rendering Error: {e}")
+
+with tab_dispatch:
+    st.subheader("Execute Automated Dispatch Batch")
+    st.write("Trigger automated recurrence expansion and personalized dispatch for all active contacts.")
+    
+    if st.button("⚡ Dispatch All Scheduled Reminders", type="primary", use_container_width=True):
+        with st.spinner("Processing recurrence schedules and dispatching..."):
+            from main import main as run_pipeline
+            run_pipeline()
+            st.success("Automated campaign dispatch run completed successfully!")
+
+    st.markdown("### Active Scheduled Campaigns")
+    st.dataframe(reminders_df, use_container_width=True)
+
+with tab_logs:
+    st.subheader("Message Delivery Logs & Relational Audit Trail")
+    if settings.db_path.exists():
+        conn = sqlite3.connect(str(settings.db_path))
         logs_df = pd.read_sql_query("SELECT id, reminder_id, recipient_name, recipient_email, subject, status, error_detail, timestamp FROM message_logs ORDER BY id DESC", conn)
         conn.close()
+        
         if not logs_df.empty:
-            st.dataframe(logs_df, use_container_width=True)
+            # Status Pie Chart
+            col_l1, col_l2 = st.columns([1, 2])
+            with col_l1:
+                st_counts = logs_df["status"].value_counts().reset_index()
+                st_counts.columns = ["Status", "Count"]
+                fig_stat = px.pie(st_counts, values="Count", names="Status", hole=0.4, title="Delivery Outcome Share")
+                st.plotly_chart(fig_stat, use_container_width=True)
+            with col_l2:
+                st.write("**Recent Delivery Transmissions:**")
+                st.dataframe(logs_df.head(10), use_container_width=True)
             
-            # Status summary
-            status_counts = logs_df["status"].value_counts()
-            st.bar_chart(status_counts)
+            st.markdown("---")
+            st.dataframe(logs_df, use_container_width=True)
         else:
-            st.info("No message logs found yet. Run `python main.py` to trigger email dispatch.")
-    else:
-        st.info("Database not initialized yet.")
+            st.info("No delivery logs found. Click 'Dispatch All Scheduled Reminders' to trigger a batch run.")
 
-with tab2:
-    st.subheader("Audience Directory & Preferences")
-    if not contacts_df.empty:
-        st.dataframe(contacts_df, use_container_width=True)
-
-with tab3:
-    st.subheader("Configured Reminder Schedules")
-    if not reminders_df.empty:
-        st.dataframe(reminders_df, use_container_width=True)
-
-with tab4:
-    st.subheader("Personalized Email Preview")
-    templates_dir = ROOT / "templates"
-    if templates_dir.exists():
-        templates = [p.name for p in templates_dir.glob("*.html")]
-        selected_template = st.selectbox("Select Template", templates)
-        
-        c_a, c_b = st.columns(2)
-        with c_a:
-            p_name = st.text_input("Recipient Name", "Rohit Singh")
-            p_title = st.text_input("Task / Event Title", "Project Final Review")
-        with c_b:
-            p_time = st.text_input("Event Timestamp", "2026-11-20 18:30:00")
-            p_tz = st.text_input("Timezone", "Asia/Kolkata")
-        
-        rendered_html = render_email(
-            templates_dir,
-            selected_template,
-            {"name": p_name, "title": p_title, "scheduled_time": p_time, "timezone": p_tz},
-        )
-        st.markdown("**Rendered HTML:**")
-        st.components.v1.html(rendered_html, height=280, scrolling=True)
-
-with tab5:
-    st.subheader("Direct Dispatch Simulator (Dry-Run)")
-    st.write("Simulate sending a notification to test error handling and delivery tracking.")
-    test_email = st.text_input("Recipient Email", "candidate@testdomain.com")
-    test_subject = st.text_input("Email Subject", "Test Notification: Automation System Ready")
+with tab_contacts:
+    st.subheader("Audience Directory & Opt-Out Status")
+    st.dataframe(contacts_df, use_container_width=True)
     
-    if st.button("🚀 Trigger Test Send"):
-        status, err = send_email(test_email, test_subject, "<p>This is a simulated verification test.</p>", dry_run=True)
-        if status == "sent (dry-run)":
-            st.success(f"Successfully simulated dispatch to {test_email}! Status: {status}")
-        else:
-            st.error(f"Failed to dispatch: {err}")
+    # Download
+    csv_bytes = contacts_df.to_csv(index=False).encode("utf-8")
+    st.download_button("📥 Export Contacts Directory (CSV)", data=csv_bytes, file_name="audience_contacts.csv", mime="text/csv")
