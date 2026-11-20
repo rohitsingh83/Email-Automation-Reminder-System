@@ -1,0 +1,3 @@
+reminder_id,title,scheduled_time,rrule,template_name
+REM-101,Python Weekly Doubt Session,2026-11-20 19:00:00,FREQ=DAILY;COUNT=2,session_reminder.html
+REM-102,Project Submission Deadline,2026-11-22 18:00:00,,deadline_reminder.html

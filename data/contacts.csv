@@ -1,0 +1,5 @@
+name,email,timezone,unsubscribed
+Aarav Sharma,aarav.sharma@example.com,Asia/Kolkata,false
+Priya Nair,priya.nair@example.com,Asia/Kolkata,false
+Rohan Verma,rohan.verma@example.com,Asia/Kolkata,true
+Sneha Reddy,sneha.reddy@example.com,Asia/Kolkata,false
