@@ -15,6 +15,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
 )
+logging.getLogger("matplotlib").setLevel(logging.WARNING)  # hide matplotlib INFO noise
 logger = logging.getLogger("email_automation")
 
 

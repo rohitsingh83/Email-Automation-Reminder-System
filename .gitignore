@@ -4,6 +4,5 @@ venv/
 .venv/
 .env
 db/*.db
-outputs/*.csv
 logs/*.log
 .DS_Store

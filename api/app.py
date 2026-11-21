@@ -18,9 +18,18 @@ def health():
     return {"status": "ok", "service": "Email-Automation-Reminder-System"}
 
 
+def _connect() -> sqlite3.Connection:
+    """Open the log database, creating the db/ folder and schema on first use."""
+    db_path = ROOT / "db" / "email.db"
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    conn = sqlite3.connect(str(db_path))
+    conn.executescript((ROOT / "db" / "schema.sql").read_text(encoding="utf-8"))
+    return conn
+
+
 @app.get("/logs")
 def get_logs():
-    conn = sqlite3.connect(str(ROOT / "db" / "email.db"))
+    conn = _connect()
     conn.row_factory = sqlite3.Row
     rows = conn.execute("SELECT reminder_id, recipient_name, recipient_email, subject, status, error_detail, timestamp FROM message_logs ORDER BY id DESC").fetchall()
     conn.close()
