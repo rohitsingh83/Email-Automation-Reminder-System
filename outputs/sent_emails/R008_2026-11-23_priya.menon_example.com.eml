@@ -1,0 +1,84 @@
+Subject: =?utf-8?q?=F0=9F=94=94?= Reminder: Daily medicine reminder (today)
+From: Reminder Bot <reminder-bot@example.com>
+To: Priya Menon <priya.menon@example.com>
+Message-ID: <179528569121.2018.18317272984123096173@example.com>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============1713637949114386436=="
+
+--===============1713637949114386436==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Reminder
+
+          =F0=9F=94=94 Daily medicine reminder
+
+          Hi Priya,
+
+Friendly reminder: Daily medicine reminder on Monday, 23 November 2026 at 09:=
+00 PM.
+
+            =E2=80=A2 Take vitamin D tablet after dinner
+
+          Regards,
+Reminder Bot
+
+          Sent automatically by the Email Automation & Reminder System =C2=B7=
+ reminder R008
+
+          Don't want these emails? Reply with "unsubscribe".
+
+--===============1713637949114386436==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<!DOCTYPE html>
+<html>
+<body style=3D"margin:0;padding:0;background:#F1F5F9;font-family:Segoe UI,Ari=
+al,sans-serif;">
+  <table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"backgrou=
+nd:#F1F5F9;padding:24px 0;">
+    <tr><td align=3D"center">
+      <table width=3D"600" cellpadding=3D"0" cellspacing=3D"0" style=3D"backg=
+round:#FFFFFF;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,=
+0,0,.08);">
+        <tr><td style=3D"background:#0F766E;padding:22px 28px;color:#FFFFFF;">
+          <div style=3D"font-size:13px;letter-spacing:.08em;text-transform:up=
+percase;opacity:.85;">Reminder</div>
+          <div style=3D"font-size:24px;font-weight:700;margin-top:4px;">=F0=
+=9F=94=94 Daily medicine reminder</div>
+        </td></tr>
+        <tr><td style=3D"padding:26px 28px;color:#0F172A;font-size:15px;line-=
+height:1.6;">
+          <p style=3D"margin-top:0;">Hi Priya,</p>
+         =20
+<p>Friendly reminder: <b>Daily medicine reminder</b> on <b>Monday, 23 Novembe=
+r 2026</b> at <b>09:00 PM</b>.</p>
+
+         =20
+          <table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"=
+margin:18px 0;background:#F8FAFC;border-left:4px solid #0F766E;border-radius:=
+6px;">
+           =20
+            <tr><td style=3D"padding:8px 14px;font-size:14px;color:#334155;">=
+=E2=80=A2 Take vitamin D tablet after dinner</td></tr>
+           =20
+          </table>
+         =20
+          <p style=3D"margin-bottom:0;">Regards,<br><b>Reminder Bot</b></p>
+        </td></tr>
+        <tr><td style=3D"padding:14px 28px;background:#F8FAFC;color:#94A3B8;f=
+ont-size:12px;">
+          Sent automatically by the Email Automation &amp; Reminder System =
+=C2=B7 reminder R008<br>
+          Don't want these emails? Reply with "unsubscribe".
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>
+
+--===============1713637949114386436==--

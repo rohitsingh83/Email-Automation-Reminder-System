@@ -1,0 +1,93 @@
+Subject: =?utf-8?q?=F0=9F=92=B3?= Payment due in 2 days: Electricity bill
+ payment
+From: Reminder Bot <reminder-bot@example.com>
+To: Priya Menon <priya.menon@example.com>
+Message-ID: <179528569120.2018.61589714901122245@example.com>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============0697174149468374056=="
+
+--===============0697174149468374056==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Payment due
+
+          =F0=9F=92=B3 Electricity bill payment
+
+          Hi Priya,
+
+Your payment Electricity bill payment is due on Wednesday, 25 November 2026, =
+in 2 days.
+
+Paying on time avoids late fees and keeps your record clean.
+
+            =E2=80=A2 Amount due: Rs 2450
+
+            =E2=80=A2 Pay via BESCOM app or UPI
+
+          Regards,
+Reminder Bot
+
+          Sent automatically by the Email Automation & Reminder System =C2=B7=
+ reminder R002
+
+          Don't want these emails? Reply with "unsubscribe".
+
+--===============0697174149468374056==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<!DOCTYPE html>
+<html>
+<body style=3D"margin:0;padding:0;background:#F1F5F9;font-family:Segoe UI,Ari=
+al,sans-serif;">
+  <table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"backgrou=
+nd:#F1F5F9;padding:24px 0;">
+    <tr><td align=3D"center">
+      <table width=3D"600" cellpadding=3D"0" cellspacing=3D"0" style=3D"backg=
+round:#FFFFFF;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,=
+0,0,.08);">
+        <tr><td style=3D"background:#DC2626;padding:22px 28px;color:#FFFFFF;">
+          <div style=3D"font-size:13px;letter-spacing:.08em;text-transform:up=
+percase;opacity:.85;">Payment due</div>
+          <div style=3D"font-size:24px;font-weight:700;margin-top:4px;">=F0=
+=9F=92=B3 Electricity bill payment</div>
+        </td></tr>
+        <tr><td style=3D"padding:26px 28px;color:#0F172A;font-size:15px;line-=
+height:1.6;">
+          <p style=3D"margin-top:0;">Hi Priya,</p>
+         =20
+<p>Your payment <b>Electricity bill payment</b> is due on <b>Wednesday, 25 No=
+vember 2026</b>, in <b>2 days</b>.</p>
+<p>Paying on time avoids late fees and keeps your record clean.</p>
+
+         =20
+          <table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"=
+margin:18px 0;background:#F8FAFC;border-left:4px solid #DC2626;border-radius:=
+6px;">
+           =20
+            <tr><td style=3D"padding:8px 14px;font-size:14px;color:#334155;">=
+=E2=80=A2 Amount due: Rs 2450</td></tr>
+           =20
+            <tr><td style=3D"padding:8px 14px;font-size:14px;color:#334155;">=
+=E2=80=A2 Pay via BESCOM app or UPI</td></tr>
+           =20
+          </table>
+         =20
+          <p style=3D"margin-bottom:0;">Regards,<br><b>Reminder Bot</b></p>
+        </td></tr>
+        <tr><td style=3D"padding:14px 28px;background:#F8FAFC;color:#94A3B8;f=
+ont-size:12px;">
+          Sent automatically by the Email Automation &amp; Reminder System =
+=C2=B7 reminder R002<br>
+          Don't want these emails? Reply with "unsubscribe".
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>
+
+--===============0697174149468374056==--

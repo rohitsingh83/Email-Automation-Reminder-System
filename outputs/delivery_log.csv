@@ -1,0 +1,16 @@
+reminder_id,title,category,recipient,email,occurrence,status,detail,mode,created_at
+R008,Daily medicine reminder,general,Priya Menon,priya.menon@example.com,2026-11-25,dry-run,saved R008_2026-11-25_priya.menon_example.com.eml,dry-run,2026-11-21T18:28:12
+R007,Gym membership renewal,renewal,Aarav Mehta,aarav.mehta@example.com,2026-11-28,dry-run,saved R007_2026-11-28_aarav.mehta_example.com.eml,dry-run,2026-11-21T18:28:12
+R008,Daily medicine reminder,general,Priya Menon,priya.menon@example.com,2026-11-24,dry-run,saved R008_2026-11-24_priya.menon_example.com.eml,dry-run,2026-11-21T18:28:11
+BDAY,Birthday: Aarav Mehta,birthday,Aarav Mehta,aarav.mehta@example.com,2026-11-23,dry-run,saved BDAY_2026-11-23_aarav.mehta_example.com.eml,dry-run,2026-11-21T18:28:11
+R008,Daily medicine reminder,general,Priya Menon,priya.menon@example.com,2026-11-23,dry-run,saved R008_2026-11-23_priya.menon_example.com.eml,dry-run,2026-11-21T18:28:11
+R002,Electricity bill payment,bill,Sneha Kapoor,sneha.kapoor@example.com,2026-11-25,dry-run,saved R002_2026-11-25_sneha.kapoor_example.com.eml,dry-run,2026-11-21T18:28:11
+R002,Electricity bill payment,bill,Priya Menon,priya.menon@example.com,2026-11-25,dry-run,saved R002_2026-11-25_priya.menon_example.com.eml,dry-run,2026-11-21T18:28:11
+R001,Weekly team stand-up,meeting,Kabir Singh,kabir.singh@example.com,2026-11-23,dry-run,saved R001_2026-11-23_kabir.singh_example.com.eml,dry-run,2026-11-21T18:28:11
+R001,Weekly team stand-up,meeting,Diya Sharma,diya.sharma@example.com,2026-11-23,dry-run,saved R001_2026-11-23_diya.sharma_example.com.eml,dry-run,2026-11-21T18:28:11
+R001,Weekly team stand-up,meeting,Aarav Mehta,aarav.mehta@example.com,2026-11-23,dry-run,saved R001_2026-11-23_aarav.mehta_example.com.eml,dry-run,2026-11-21T18:28:11
+R008,Daily medicine reminder,general,Priya Menon,priya.menon@example.com,2026-11-22,dry-run,saved R008_2026-11-22_priya.menon_example.com.eml,dry-run,2026-11-21T18:28:10
+R003,Python project submission,deadline,Rohan Gupta,rohan.gupta@example.com,2026-11-25,skipped,contact unsubscribed,dry-run,2026-11-21T18:28:10
+R003,Python project submission,deadline,Ananya Iyer,ananya.iyer@example.com,2026-11-25,dry-run,saved R003_2026-11-25_ananya.iyer_example.com.eml,dry-run,2026-11-21T18:28:10
+BDAY,Birthday: Ananya Iyer,birthday,Ananya Iyer,ananya.iyer@example.com,2026-11-21,dry-run,saved BDAY_2026-11-21_ananya.iyer_example.com.eml,dry-run,2026-11-21T18:28:10
+R008,Daily medicine reminder,general,Priya Menon,priya.menon@example.com,2026-11-21,dry-run,saved R008_2026-11-21_priya.menon_example.com.eml,dry-run,2026-11-21T18:28:10
