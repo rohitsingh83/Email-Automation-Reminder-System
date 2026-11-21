@@ -1,8 +1,10 @@
 __pycache__/
 *.py[cod]
-venv/
 .venv/
+venv/
 .env
-db/*.db
-logs/*.log
+.pytest_cache/
 .DS_Store
+.idea/
+.vscode/
+outputs/delivery_log.db

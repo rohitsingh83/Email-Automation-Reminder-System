@@ -1,5 +1,11 @@
-name,email,timezone,unsubscribed
-Aarav Sharma,aarav.sharma@example.com,Asia/Kolkata,false
-Priya Nair,priya.nair@example.com,Asia/Kolkata,false
-Rohan Verma,rohan.verma@example.com,Asia/Kolkata,true
-Sneha Reddy,sneha.reddy@example.com,Asia/Kolkata,false
+name,email,group,birthday,subscribed
+Aarav Mehta,aarav.mehta@example.com,team,1998-11-23,yes
+Diya Sharma,diya.sharma@example.com,team,1997-03-14,yes
+Kabir Singh,kabir.singh@example.com,team,1996-12-02,yes
+Ananya Iyer,ananya.iyer@example.com,students,2003-11-21,yes
+Rohan Gupta,rohan.gupta@example.com,students,2002-07-09,no
+Meera Nair,meera.nair@example.com,clients,1990-01-28,yes
+Arjun Reddy,arjun.reddy@example.com,clients,1994-11-27,yes
+Priya Menon,priya.menon@example.com,family,1999-05-30,yes
+Vikram Joshi,vikram.joshi@example,students,2001-02-17,yes
+Sneha Kapoor,sneha.kapoor@example.com,family,1995-12-05,yes

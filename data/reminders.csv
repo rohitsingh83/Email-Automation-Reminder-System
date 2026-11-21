@@ -1,3 +1,10 @@
-reminder_id,title,scheduled_time,rrule,template_name
-REM-101,Python Weekly Doubt Session,2026-11-20 19:00:00,FREQ=DAILY;COUNT=2,session_reminder.html
-REM-102,Project Submission Deadline,2026-11-22 18:00:00,,deadline_reminder.html
+id,title,category,recipients,due_date,due_time,repeat,remind_before_days,details,active
+R001,Weekly team stand-up,meeting,group:team,2026-11-23,10:00,weekly,0,Zoom link: https://zoom.us/j/123456 | Agenda: sprint progress and blockers,yes
+R002,Electricity bill payment,bill,priya.menon@example.com;sneha.kapoor@example.com,2026-11-25,09:00,monthly,2,Amount due: Rs 2450 | Pay via BESCOM app or UPI,yes
+R003,Python project submission,deadline,group:students,2026-11-25,23:59,none,3,Upload GitHub link + LinkedIn and Instagram screenshots to the Google Form,yes
+R004,Quarterly business review,meeting,group:clients,2026-12-01,15:00,none,1,Venue: Conference Room B | Bring Q3 numbers,yes
+R005,Car insurance renewal,renewal,priya.menon@example.com,2026-12-10,09:00,yearly,7,Policy no. CI-889201 | Renew before expiry to keep no-claim bonus,yes
+R006,Monthly SIP investment,bill,sneha.kapoor@example.com,2026-12-05,08:00,monthly,1,Rs 5000 SIP auto-debit | Keep balance in savings account,yes
+R007,Gym membership renewal,renewal,aarav.mehta@example.com,2026-11-28,07:00,none,3,Annual plan Rs 12000 | 10% early-bird discount,yes
+R008,Daily medicine reminder,general,priya.menon@example.com,2026-11-21,21:00,daily,0,Take vitamin D tablet after dinner,yes
+R009,Old campaign follow-up,general,group:clients,2026-10-01,11:00,none,0,This reminder is switched off,no
