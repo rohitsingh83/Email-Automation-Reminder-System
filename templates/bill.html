@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<p>Your payment <b>{{ title }}</b> is due on <b>{{ due_label }}</b>
+{%- if days_left == 0 %}, which is <b style="color:#DC2626;">today</b>{% else %}, in <b>{{ days_left }} day{{ 's' if days_left != 1 }}</b>{% endif %}.</p>
+<p>Paying on time avoids late fees and keeps your record clean.</p>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<p><b>{{ title }}</b> is due for renewal on <b>{{ due_label }}</b>
+({{ "today" if days_left == 0 else days_left|string + " days from now" }}).</p>
+<p>Renewing early avoids a gap in coverage or service.</p>
+{% endblock %}

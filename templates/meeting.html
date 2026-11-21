@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<p>This is a reminder for <b>{{ title }}</b> on <b>{{ due_label }}</b> at <b>{{ due_time }}</b>
+{% if days_left == 0 %}(that's <b>today</b>){% elif days_left == 1 %}(that's <b>tomorrow</b>){% else %}(in {{ days_left }} days){% endif %}.</p>
+<p>Please join on time and come prepared.</p>
+{% endblock %}
