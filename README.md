@@ -1,5 +1,7 @@
 # Email Automation & Reminder System
 
+🌐 **Live report:** https://rohitsingh83.github.io/Email-Automation-Reminder-System/ · 💻 **Source:** https://github.com/rohitsingh83/Email-Automation-Reminder-System
+
 A Python system that sends **personalised, professionally designed reminder emails** automatically: bills,
 meetings, deadlines, renewals and birthdays. It handles repeating schedules and lead times, skips unsubscribed
 contacts, never sends the same reminder twice, and logs every delivery. You can use it from the command line or
@@ -82,7 +84,7 @@ Email-Automation-Reminder-System/
 │   └── engine.py             # the automation loop
 ├── outputs/                  # sample sent emails (.eml/.html), delivery_log.csv
 ├── images/                   # dashboard and email screenshots
-├── docs/                     # project explanation, interview Q&A
+├── docs/                     # live report (index.html, GitHub Pages), project explanation, interview Q&A
 ├── tests/test_reminders.py
 ├── main.py                   # command-line tool
 ├── app.py                    # Streamlit control centre
